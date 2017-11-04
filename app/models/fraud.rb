@@ -1,0 +1,16 @@
+ class Fraud < ActiveRecord::Base
+  has_many :images
+  accepts_nested_attributes_for :images
+  
+  mount_uploader :avatar, AvatarUploader
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  after_update :crop_avatar
+  
+  def crop_avatar
+    avatar.recreate_versions! if crop_x.present?
+  end
+  
+  private
+  
+  
+end

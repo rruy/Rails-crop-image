@@ -1,0 +1,11 @@
+<% @frauds.each do |fraud| %>
+
+    <%= fraud.title %>
+    <br/>
+    <% fraud.images.each do |i| %>
+        <img src="<%= i.image %>" style="height: 100px;" />
+    <% end %>
+    <%= link_to edit_fraud_path(fraud) do %>Edit <% end %> 
+    <br/>
+    <br/>
+<% end %>

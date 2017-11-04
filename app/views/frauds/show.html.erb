@@ -1,0 +1,26 @@
+<%= form_for @fraud, html: { class: "form-horizontal", autocomplete: "off", multipart: true } do |f| %>
+        <div class="control-group">
+            <%= f.label :title, class: 'control-label' %>
+            <%= f.text_field :title, class: 'span3' %>
+        </div>
+        
+        <div class="control-group">
+            <%= f.label :avatar, class: 'control-label' %>
+            <%= image_tag @fraud.avatar.url(:thumb) %>
+            <%= f.file_field :avatar, class: 'span3' %>
+        </div>
+
+        <div class="control-group">
+            <%= f.fields_for :images, Image.new do |ff| %>
+            <%= ff.label :image, "Upload Evidence", class: 'control-label' %>
+                <div class="controls" >
+                    <%= ff.file_field :image, multiple: true, class: 'btn btn-file', id: 'upload-image', name: "fraud[images_attributes][][image]" %>
+                </div>
+            <% end %>
+        </div>
+        
+    
+        <%= f.submit class: 'btn', id: 'submit-data' %>
+    
+<% end %>
+
